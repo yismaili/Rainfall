@@ -1,36 +1,41 @@
+#include <iostream>
+#include <cstdlib>
+#include <cstring>
+
+
+
 class N {
-private:
-    int number;
-    char *annotation;
 
 public:
+    int _n;
+    char _annotation[104];
+
     N(int n) {
-        number = n;
+    this->_n = n;
     }
-    
-    virtual void operator+(N& other) = 0;  // pure virtual function
-    
-    void setAnnotation(char *str) {
-        memcpy(annotation, str, strlen(str));
+
+    void setAnnotation(char *annotation) {
+        int len = strlen(annotation);
+        memcpy(this->_annotation,annotation,len);
+    }
+
+    int operator()(N *a, N *b) {
+        return a->_n + b->_n;
     }
 };
 
-int main(int argc, char *argv[]) {
-    if(argc <= 1) {
-        _exit(1);
-    }
-    
-    // (108) bytes
-    N* n1 = new N(5);
-    N* n2 = new N(6);
-    
-    N* a = n1;
-    N* b = n2;
-    
-    a->setAnnotation(argv[1]);
-    
-    // call virtual function (operator+)
-    (*b) + (*a);
-    
-    return 0;
+
+int  main(int argc, const char **argv, const char **envp)
+{
+    N *v3; 
+    N *v4; 
+    N *v6;
+
+    if ( argc <= 1 )
+    exit(1);
+    v3 = new N(5);
+    v6 = v3;
+    v4 = new N(6);
+    v6->setAnnotation((char *)argv[1]);
+    return (**(int (***)(N *, N *))v4)(v4, v6);
 }

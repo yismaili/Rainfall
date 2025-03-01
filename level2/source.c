@@ -1,27 +1,26 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-void p() {
-    char buffer[64];
-    unsigned int ret_addr;
+
+void p(void)
+
+{
+    unsigned int addr;
+    char input [76];
 
     fflush(stdout);
-
-    gets(buffer);
-
-    ret_addr = *((unsigned int*)($ebp + 4));
-
-    if ((ret_addr & 0xb0000000) == 0xb0000000) {
-        printf("%x\n", ret_addr);
-        _exit(1);
+    gets(input);
+    if ((addr & 0xb0000000) == 0xb0000000) {
+    printf("(%p)\n",addr);
+    _exit(1);
     }
-
-    puts(buffer);
-    strdup(buffer);
+    puts(input);
+    strdup(input);
+    return;
 }
 
-int main() {
+
+
+int main()  { 
     p();
-    return 0;
+    return;
 }

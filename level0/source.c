@@ -1,19 +1,28 @@
-int main(int argc, char *argv[]) 
+
+#include <stdio.h>
+#include <unistd.h>
+
+
+int main(int argc,char **argv)
+
 {
-    if (atoi(argv[1]) == 423) {
-        char *duplicated_string = strdup(0x80c5348);
-        
-        gid_t egid = getegid();
-        uid_t euid = geteuid();
-        
-        setresgid(egid, egid, egid);
-        
-        setresuid(euid, euid, euid);
-        
-        execv(0x80c5348, &duplicated_string);
-    } else {
-        fwrite(error_message, 1, 5, stderr);
+    int nbr;
+    char *ptr;
+    __uid_t uid;
+    __gid_t gid;
+
+    nbr = atoi(*(argv[1]));
+    if (nbr == 423) {
+        ptr = strdup("/bin/sh");
+        gid = getegid();
+        uid = geteuid();
+        setresgid(gid,gid,gid);
+        setresuid(uid,uid,uid);
+        execv("/bin/sh",&ptr);
     }
-    
+    else {
+        fwrite("No !\n",1,5,stderr);
+    }
     return 0;
 }
+

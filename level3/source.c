@@ -1,18 +1,24 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-void v() {
-    char buffer[520];
-    fgets(buffer, 512, stdin);
-    printf(buffer);
-    
-    if (*(int*)0x804988c == 0x40) {
-        fwrite("You win!\n", 1, 12, stdout);
-        system("/bin/sh");
-    }
+int m = 0;
+
+void v(void)
+
+{
+  char input [520];
+  
+  fgets(input,0x200,stdin);
+  printf(input);
+  if (m == 0x40) {
+    fwrite("Wait what?!\n",1,0xc,stdout);
+    system("/bin/sh");
+  }
+  return;
 }
+
+
 
 int main() {
     v();
-    return 0;
+    return 1 ;
 }

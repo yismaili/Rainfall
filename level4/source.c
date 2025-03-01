@@ -1,21 +1,21 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-void p(char *buffer) {
-    printf(buffer);
-}
+int m = 0;
 
-void n() {
-    char buffer[520];
-    fgets(buffer, 512, stdin);
-    p(buffer);
-    
-    if (*(int*)0x8049810 == 0x1025544) {
-        system("/bin/sh");
+void n(void)
+
+{
+    char input [520];
+
+    fgets(input,0x200,stdin);
+    p(input);
+    if (m == 0x1025544) {
+    system("/bin/cat /home/user/level5/.pass");
     }
+    return;
 }
 
 int main() {
     n();
-    return 0;
+    return 1;
 }

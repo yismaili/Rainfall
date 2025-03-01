@@ -8,10 +8,12 @@ struct Node {
     char *str;
 };
 
+char c[68];
+
 void m() {
     time_t t;
     time(&t);
-    printf("%s - %d\n", (char*)0x8049960, (int)t);
+    printf("%s - %d\n", c, (int)t);
 }
 
 int main(int argc, char *argv[]) {
@@ -31,7 +33,7 @@ int main(int argc, char *argv[]) {
     strcpy(node2->str, argv[2]);
     
     FILE *fp = fopen("/home/user/level8/.pass", "r");
-    fgets((char*)0x8049960, 68, fp);
+    fgets(c, 68, fp);
     
     puts("~~");
     
